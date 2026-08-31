@@ -3,7 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "server:dev": "npm run dev --workspace=server"
+    "server:dev": "npm run dev --workspace=server",
+    "client:dev": "npm run dev --workspace=client"
   },
   "workspaces": [
     "apps/*",
