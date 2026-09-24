@@ -11,8 +11,11 @@ import {
   getColumnsForBoard,
   updateColumn,
 } from "./columns.service.js";
+import { authenticate } from "../../lib/authenticate.js";
 
 export const columnRoutes: FastifyPluginAsyncTypebox = async (app) => {
+  app.addHook("preHandler", authenticate);
+
   app.post(
     "/boards/:boardId/columns",
     { schema: createColumnSchema },

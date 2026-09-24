@@ -14,7 +14,6 @@ import {
   updateBoardSchema,
   deleteBoardSchema,
 } from "./boards.schema.js";
-import { columnRoutes } from "./columns/columns.routes.js";
 
 export const boardRoutes: FastifyPluginAsyncTypebox = async (app, opts) => {
   app.addHook("preHandler", authenticate);
@@ -92,11 +91,4 @@ export const boardRoutes: FastifyPluginAsyncTypebox = async (app, opts) => {
       }
     },
   );
-
-  /**
-   * Column routes are nested under the board routes because they require a board ID in the URL. This allows us to group related routes together and makes it clear that columns belong to a specific board.
-   * The column routes are defined in a separate file (columns.routes.ts) to keep the code organized and maintainable. This separation of concerns makes it easier to manage and scale the application as it grows.
-   * By registering the column routes within the board routes, we ensure that all column-related endpoints are properly namespaced under their respective boards, providing a clear and intuitive API structure for clients.
-   */
-  columnRoutes(app, opts);
 };

@@ -1,6 +1,6 @@
 import { Type, Static } from "@sinclair/typebox";
 
-export const tags = ["Boards"];
+const tags = ["Boards"];
 const boardResponseSchema = Type.Object({
   id: Type.String({ format: "uuid" }),
   name: Type.String(),

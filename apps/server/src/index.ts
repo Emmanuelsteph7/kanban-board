@@ -1,31 +1,22 @@
 import Fastify from "fastify";
 import { TypeBoxTypeProvider } from "@fastify/type-provider-typebox";
-import swagger from "@fastify/swagger";
-import scalarApiReference from "@scalar/fastify-api-reference";
 
 import { authRoutes } from "./modules/auth/auth.routes.js";
 import { boardRoutes } from "./modules/boards/boards.routes.js";
+import { columnRoutes } from "./modules/columns/columns.routes.js";
+import { cardRoutes } from "./modules/cards/cards.routes.js";
+import { scalarDocsConfig } from "./lib/scalarDocs.js";
 
 const app = Fastify({
   logger: true,
 }).withTypeProvider<TypeBoxTypeProvider>();
 
-await app.register(swagger, {
-  openapi: {
-    info: {
-      title: "Kanban Board API",
-      description: "Real-time collaborative kanban board — REST API",
-      version: "0.1.0",
-    },
-  },
-});
-
-await app.register(scalarApiReference, {
-  routePrefix: "/docs",
-});
+scalarDocsConfig(app);
 
 app.register(authRoutes);
 app.register(boardRoutes);
+app.register(columnRoutes);
+app.register(cardRoutes);
 
 const start = async () => {
   try {

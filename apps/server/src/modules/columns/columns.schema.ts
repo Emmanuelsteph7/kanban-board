@@ -1,5 +1,6 @@
 import { Type, Static } from "@sinclair/typebox";
-import { tags } from "../boards.schema.js";
+
+const tags = ["Columns"];
 
 const columnResponseSchema = Type.Object({
   id: Type.String({ format: "uuid" }),
