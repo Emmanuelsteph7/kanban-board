@@ -6,12 +6,14 @@ import { boardRoutes } from "./modules/boards/boards.routes.js";
 import { columnRoutes } from "./modules/columns/columns.routes.js";
 import { cardRoutes } from "./modules/cards/cards.routes.js";
 import { scalarDocsConfig } from "./lib/scalarDocs.js";
+import { corsConfig } from "./lib/cors.js";
 
 const app = Fastify({
   logger: true,
 }).withTypeProvider<TypeBoxTypeProvider>();
 
 scalarDocsConfig(app);
+corsConfig(app);
 
 app.register(authRoutes);
 app.register(boardRoutes);
