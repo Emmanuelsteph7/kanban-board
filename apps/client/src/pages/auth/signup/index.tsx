@@ -27,11 +27,7 @@ const Signup = () => {
 
       handleLoginSuccess(response?.token);
       navigate(Path.Boards);
-    } catch (error) {
-      toast.error("Couldn't create your account", {
-        description: "Something went wrong. Give it another try.",
-      });
-    }
+    } catch (error) {}
   };
 
   return (

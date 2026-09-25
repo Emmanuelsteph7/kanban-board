@@ -1,9 +1,11 @@
 import axios from "axios";
+import { toast } from "../../components/toast";
 
 const baseURL = "http://localhost:3000";
 
 export const axiosConfig = axios.create({
   baseURL,
+  showToastOnError: true,
 });
 
 // Runs before every request: attach the JWT if we have one
@@ -22,10 +24,26 @@ axiosConfig.interceptors.response.use(
   (response) => response,
   (error) => {
     const token = localStorage.getItem("token");
+    const showToastOnError = error.config?.showToastOnError;
+    const errorMsg =
+      error?.response?.data?.message || error?.response?.data?.error;
+    const is401Error = error.response?.status === 401 && token;
 
-    if (error.response?.status === 401 && token) {
+    if (showToastOnError && !is401Error) {
+      toast.error({
+        description: errorMsg,
+      });
+    }
+
+    if (is401Error) {
       localStorage.removeItem("token");
       window.location.href = "/login";
+
+      toast.error({
+        title: "Session Expired",
+        description:
+          "Your session has expired. Please log in again to continue accessing your account.",
+      });
     }
     return Promise.reject(error);
   },

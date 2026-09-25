@@ -27,15 +27,7 @@ const Login = () => {
 
       handleLoginSuccess(response?.token);
       navigate(Path.Boards);
-    } catch (error: any) {
-      const err = error?.response?.data?.error;
-
-      console.log({ error, err });
-
-      toast.error("Couldn't log you in", {
-        description: err,
-      });
-    }
+    } catch (error: any) {}
   };
 
   return (

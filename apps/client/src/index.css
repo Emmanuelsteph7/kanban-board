@@ -17,9 +17,7 @@
 
 body {
   font-family: var(--font-sans);
-  font-feature-settings:
-    "cv11",
-    "ss01";
+  font-feature-settings: "cv11", "ss01";
   background-color: var(--color-paper);
   color: var(--color-ink);
 }
@@ -28,8 +26,9 @@ input:-webkit-autofill,
 input:-webkit-autofill:hover,
 input:-webkit-autofill:focus {
   -webkit-text-fill-color: var(--color-ink);
-  -webkit-box-shadow: 0 0 0 1000px color-mix(in srgb, var(--color-ink) 5%, white) inset;
-  box-shadow: 0 0 0 1000px color-mix(in srgb, var(--color-ink) 5%, white) inset;
+  -webkit-box-shadow: 0 0 0 1000px
+    color-mix(in srgb, var(--color-ink) 10%, white) inset;
+  box-shadow: 0 0 0 1000px color-mix(in srgb, var(--color-ink) 10%, white) inset;
   transition: background-color 9999s ease-in-out 0s;
 }
 

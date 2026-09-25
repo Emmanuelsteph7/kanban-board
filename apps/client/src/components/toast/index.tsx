@@ -4,8 +4,15 @@ import type { ReactNode } from "react";
 type Variant = "success" | "error" | "info";
 
 interface ToastOptions {
+  title?: string;
   description?: string;
 }
+
+const fallbackTitles: Record<Variant, string> = {
+  success: "Success",
+  error: "Error",
+  info: "Info",
+};
 
 const icons: Record<Variant, ReactNode> = {
   success: (
@@ -92,19 +99,18 @@ function ToastCard({
   );
 }
 
-const create =
-  (variant: Variant) => (title: string, options?: ToastOptions) =>
-    sonnerToast.custom(
-      (id) => (
-        <ToastCard
-          id={id}
-          title={title}
-          description={options?.description}
-          variant={variant}
-        />
-      ),
-      { unstyled: true },
-    );
+const create = (variant: Variant) => (options?: ToastOptions) =>
+  sonnerToast.custom(
+    (id) => (
+      <ToastCard
+        id={id}
+        title={options?.title ?? fallbackTitles[variant]}
+        description={options?.description}
+        variant={variant}
+      />
+    ),
+    { unstyled: true },
+  );
 
 export const toast = Object.assign(create("info"), {
   success: create("success"),
