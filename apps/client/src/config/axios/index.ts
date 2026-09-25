@@ -1,7 +1,18 @@
-import axios from "axios";
+import axios, { type AxiosRequestConfig } from "axios";
 import { toast } from "../../components/toast";
 
 const baseURL = "http://localhost:3000";
+
+/** Config to disable API error toasts */
+export const CONFIG_NO_ERROR_TOAST: AxiosRequestConfig = {
+  showToastOnError: false,
+};
+
+export const MULTI_PART_FORM_DATA_HEADER = {
+  headers: {
+    "Content-Type": "multipart/form-data",
+  },
+};
 
 export const axiosConfig = axios.create({
   baseURL,
