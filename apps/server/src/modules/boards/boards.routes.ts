@@ -82,7 +82,17 @@ export const boardRoutes: FastifyPluginAsyncTypebox = async (app, opts) => {
           request.user.userId,
           request.params.id,
         );
-        return { ...board, createdAt: board.createdAt.toISOString() };
+        return {
+          ...board,
+          createdAt: board.createdAt.toISOString(),
+          columns: board.columns.map((column) => ({
+            ...column,
+            cards: column.cards.map((card) => ({
+              ...card,
+              updatedAt: card.updatedAt.toISOString(),
+            })),
+          })),
+        };
       } catch (err) {
         if (err instanceof Error && err.message === "BOARD_NOT_FOUND") {
           return reply.code(404).send({ error: "Board not found" });

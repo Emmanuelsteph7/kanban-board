@@ -7,6 +7,30 @@ const boardResponseSchema = Type.Object({
   createdAt: Type.String({ format: "date-time" }),
 });
 
+const cardResponseSchema = Type.Object({
+  id: Type.String({ format: "uuid" }),
+  title: Type.String(),
+  description: Type.Union([Type.String(), Type.Null()]),
+  position: Type.Number(),
+  columnId: Type.String({ format: "uuid" }),
+  updatedAt: Type.String({ format: "date-time" }),
+});
+
+const columnResponseSchema = Type.Object({
+  id: Type.String({ format: "uuid" }),
+  name: Type.String(),
+  position: Type.Number(),
+  boardId: Type.String({ format: "uuid" }),
+  cards: Type.Array(cardResponseSchema),
+});
+
+const boardWithColumnsResponseSchema = Type.Object({
+  id: Type.String({ format: "uuid" }),
+  name: Type.String(),
+  createdAt: Type.String({ format: "date-time" }),
+  columns: Type.Array(columnResponseSchema),
+});
+
 export const createBoardSchema = {
   tags,
   summary: "Create a new board",
@@ -67,7 +91,7 @@ export const boardIdParamSchema = {
     id: Type.String({ format: "uuid" }),
   }),
   response: {
-    200: boardResponseSchema,
+    200: boardWithColumnsResponseSchema,
     404: Type.Object({ error: Type.String() }),
   },
 };

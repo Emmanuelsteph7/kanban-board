@@ -1,8 +1,15 @@
+import type { Columns } from "../columns";
+import type { Cards } from "../cards";
+
 export namespace Boards {
   export interface Board {
     id: string;
     name: string;
     createdAt: string;
+  }
+
+  export interface BoardWithColumns extends Board {
+    columns: (Columns.Column & { cards: Cards.Card[] })[];
   }
 
   export namespace CreateBoard {
@@ -37,6 +44,6 @@ export namespace Boards {
       id: string;
     }
 
-    export type Response = Board;
+    export type Response = BoardWithColumns;
   }
 }

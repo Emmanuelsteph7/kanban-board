@@ -6,5 +6,6 @@ export const corsConfig = async (app: any) => {
   await app.register(cors, {
     origin,
     credentials: true,
+    methods: ["GET", "POST", "PATCH", "DELETE", "OPTIONS"],
   });
 };

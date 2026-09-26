@@ -1,8 +1,9 @@
-import { forwardRef, useState } from "react";
+import { forwardRef, useState, type ReactNode } from "react";
 
 interface Props extends React.InputHTMLAttributes<HTMLInputElement> {
   errorMessage?: string;
   label: string;
+  labelAction?: ReactNode;
 }
 
 const EyeIcon = ({ visible }: { visible: boolean }) =>
@@ -30,14 +31,23 @@ const EyeIcon = ({ visible }: { visible: boolean }) =>
   );
 
 const FormInput = forwardRef<HTMLInputElement, Props>(
-  ({ label, errorMessage, type, ...props }, ref) => {
+  ({ label, errorMessage, labelAction, type, ...props }, ref) => {
     const [showPassword, setShowPassword] = useState(false);
     const isPassword = type === "password";
     const inputType = isPassword && showPassword ? "text" : type;
 
     return (
       <div>
-        <label className="block text-sm font-medium text-ink">{label}</label>
+        {labelAction ? (
+          <div className="flex items-center justify-between">
+            <label className="block text-sm font-medium text-ink">
+              {label}
+            </label>
+            {labelAction}
+          </div>
+        ) : (
+          <label className="block text-sm font-medium text-ink">{label}</label>
+        )}
         <div className="relative">
           <input
             ref={ref}

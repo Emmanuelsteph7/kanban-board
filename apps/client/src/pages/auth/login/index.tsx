@@ -53,6 +53,15 @@ const Login = () => {
       <div className="animate-fade-up" style={{ animationDelay: "110ms" }}>
         <FormInput
           label="Password"
+          labelAction={
+            <a
+              href="#"
+              onClick={(e) => e.preventDefault()}
+              className="text-xs text-terracotta hover:underline"
+            >
+              Forgot?
+            </a>
+          }
           {...register("password")}
           type="password"
           errorMessage={errors.password?.message}
