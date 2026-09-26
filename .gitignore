@@ -4,3 +4,4 @@ node_modules
 apps/server/src/generated/prisma
 apps/server/prisma/migrations/migration_lock.toml
 .env
+.env.test

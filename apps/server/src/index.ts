@@ -1,24 +1,6 @@
-import Fastify from "fastify";
-import { TypeBoxTypeProvider } from "@fastify/type-provider-typebox";
+import { buildApp } from "./lib/buildApp.js";
 
-import { authRoutes } from "./modules/auth/auth.routes.js";
-import { boardRoutes } from "./modules/boards/boards.routes.js";
-import { columnRoutes } from "./modules/columns/columns.routes.js";
-import { cardRoutes } from "./modules/cards/cards.routes.js";
-import { scalarDocsConfig } from "./lib/scalarDocs.js";
-import { corsConfig } from "./lib/cors.js";
-
-const app = Fastify({
-  logger: true,
-}).withTypeProvider<TypeBoxTypeProvider>();
-
-scalarDocsConfig(app);
-corsConfig(app);
-
-app.register(authRoutes);
-app.register(boardRoutes);
-app.register(columnRoutes);
-app.register(cardRoutes);
+const app = buildApp();
 
 const start = async () => {
   try {

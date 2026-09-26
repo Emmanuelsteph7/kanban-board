@@ -97,6 +97,7 @@ export const boardRoutes: FastifyPluginAsyncTypebox = async (app, opts) => {
         if (err instanceof Error && err.message === "BOARD_NOT_FOUND") {
           return reply.code(404).send({ error: "Board not found" });
         }
+
         throw err;
       }
     },
